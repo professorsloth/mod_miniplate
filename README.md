@@ -4,7 +4,11 @@
 
 Compiling Apache modules is easiest done with the `apxs` command.
 
-### Fedora
+**Debian**
+
+    # apt-get install apache2-dev
+
+**Fedora**
 
     # dnf install httpd-devel
 
