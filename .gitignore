@@ -1,6 +1,6 @@
 *.o
 *.sw[pox]
 .libs
-mod_miniplate.la
-mod_miniplate.lo
-mod_miniplate.slo
+*.la
+*.lo
+*.slo

@@ -1,7 +1,11 @@
+OBJECTS = file.c filename.c validation.c
 MOD_SOURCE = mod_miniplate.c
-CC = apxs -i -a -c $(MOD_SOURCE)
+APXS = apxs -n miniplate -i -a -c $(MOD_SOURCE) $(OBJECTS)
+CC = gcc
+CC_FLAGS = -c
 
 .PHONY: default
 default:
-	$(CC)
+	$(CC) $(CC_FLAGS) $(OBJECTS)
+	$(APXS)
 

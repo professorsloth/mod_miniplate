@@ -4,14 +4,15 @@
 #include "http_protocol.h"
 #include "http_request.h"
 #include "apr_strings.h"
-#include "libgen.h"
 #include "string.h"
 #include "stdio.h"
 
+#include "file.h"
+#include "filename.h"
+#include "validation.h"
+
 static int miniplate_handler(request_rec*);
 static void register_hooks(apr_pool_t*);
-char* read_file(char*);
-int count_occurrences(char*, const char*);
 
 module AP_MODULE_DECLARE_DATA miniplate_module = {
 	STANDARD20_MODULE_STUFF,
@@ -23,67 +24,38 @@ module AP_MODULE_DECLARE_DATA miniplate_module = {
 	register_hooks,
 };
 
-char* read_file(char *filename)
-{
-	char *buffer = 0;
-	int length;
-	FILE *f = fopen(filename, "rb");
-
-	if (f) {
-		fseek(f, 0, SEEK_END);
-		length = ftell(f);
-		fseek(f, 0, SEEK_SET);
-		buffer = malloc(length);
-		if (buffer) {
-			fread(buffer, 1, length, f);
-		}
-		fclose(f);
-	}
-
-	return buffer;
-}
-
-int count_occurrences(char *string, const char *substring)
-{
-	int occurrences = 0;
-
-	const char *next_string = string;
-
-	while ((next_string = strstr(next_string, substring))) {
-		occurrences++;
-		next_string++;
-	}
-
-	return occurrences;
-}
-
 static int miniplate_handler(request_rec *r)
 {
-	char *filename = 0;
-	char *this_directory = 0;
 	char *base_template_filename = 0;
 	char *template_content = 0;
-	char *file_content = 0;
+	int template_length = 0;
+	char *content_file_content = 0;
+	int content_file_length = 0;
 	int replacement_occurrences = 0;
 
 	if (!r->handler || strcmp(r->handler, "miniplate")) {
 		return DECLINED;
 	}
 
-	filename = apr_pstrdup(r->pool, r->filename);
-	this_directory = apr_pstrdup(r->pool, dirname(r->filename));
-	base_template_filename = apr_pstrcat(r->pool, this_directory, "/_base.html", NULL);
-	template_content = read_file(base_template_filename);
-	file_content = read_file(filename);
+	base_template_filename = get_template_filename(r->filename);
+	template_length = read_file(base_template_filename, &template_content);
+	content_file_length = read_file(r->filename, &content_file_content);
 
-	ap_set_content_type(r, "text/html");
+	if (template_length < 1) {
+		return HTTP_INTERNAL_SERVER_ERROR;
+	}
+
+	if (content_file_length < 1) {
+		return HTTP_NO_CONTENT;
+	}
 
 	replacement_occurrences = count_occurrences(template_content, "%s");
 	if (2 != replacement_occurrences) {
 		return HTTP_INTERNAL_SERVER_ERROR;
 	}
 
-	ap_rprintf(r, template_content, r->parsed_uri.path, file_content);
+	ap_set_content_type(r, "text/html");
+	ap_rprintf(r, template_content, r->parsed_uri.path, content_file_content);
 
 	return OK;
 }
