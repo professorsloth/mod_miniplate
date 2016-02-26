@@ -9,6 +9,7 @@
 
 #include "file.h"
 #include "filename.h"
+#include "templating.h"
 #include "validation.h"
 
 static int miniplate_handler(request_rec*);
@@ -32,6 +33,7 @@ static int miniplate_handler(request_rec *r)
 	char *content_file_content = 0;
 	int content_file_length = 0;
 	int replacement_occurrences = 0;
+	char* output;
 
 	if (!r->handler || strcmp(r->handler, "miniplate")) {
 		return DECLINED;
@@ -49,13 +51,11 @@ static int miniplate_handler(request_rec *r)
 		return HTTP_NO_CONTENT;
 	}
 
-	replacement_occurrences = count_occurrences(template_content, "%s");
-	if (2 != replacement_occurrences) {
-		return HTTP_INTERNAL_SERVER_ERROR;
-	}
+	output = replace_by_keyword("(content)", template_content, content_file_content);
+	output = replace_by_keyword("(path)", output, r->parsed_uri.path);
 
 	ap_set_content_type(r, "text/html");
-	ap_rprintf(r, template_content, r->parsed_uri.path, content_file_content);
+	ap_rputs(output, r);
 
 	return OK;
 }
