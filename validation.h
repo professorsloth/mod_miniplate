@@ -1,2 +1,2 @@
-int count_occurrences(char *, const char *);
+int count_occurrences(char*, const char*);
 
