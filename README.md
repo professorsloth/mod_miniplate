@@ -22,25 +22,27 @@ After the installation, the web server must be restarted for the module to be lo
 
 ## Setup
 
-Miniplate a handler for HTML files.
-It was designed with MultiViews in mind.
+Miniplate is a handler for HTML files.
 You can add this to your `.htaccess`.
 
     AddHandler miniplate .html
-    Options +MultiViews
 
 ## Template file
 
 Miniplate expects a file called `_base.html` to exist in the same directory as the file to be served.
-It must contain two occurrences of `%s`. The first is for the title (it's the URI path), the second is where the content will be injected.
+Keywords can be used to point out what content should be injected into it.
+
+**(path)** - Request URI path. This is the `/hello` in `http://www.example.org/hello`.
+
+**(content)** - The content of the filename the request was for.
 
     <!DOCTYPE html>
     <html>
     <head>
-        <title>%s - My site</title>
+        <title>(path) - My site</title>
     </head>
     <body>
-        %s
+        (content)
     </body>
     </html>
 
