@@ -29,7 +29,6 @@ static int miniplate_handler(request_rec *r)
 	int template_length = 0;
 	char *content_file_content = 0;
 	int content_file_length = 0;
-	int replacement_occurrences = 0;
 	char* output;
 
 	if (!r->handler || strcmp(r->handler, "miniplate")) {
