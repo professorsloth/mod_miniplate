@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include "../filename.h"
+#include "../miniplate.h"
 
 START_TEST (test_can_figure_out_template_filename_from_content_filename)
 {

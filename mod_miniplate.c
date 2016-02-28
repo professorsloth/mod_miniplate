@@ -1,16 +1,13 @@
-#include "httpd.h"
-#include "http_log.h"
-#include "http_core.h"
-#include "http_protocol.h"
-#include "http_request.h"
-#include "apr_strings.h"
-#include "string.h"
-#include "stdio.h"
+#include <httpd.h>
+#include <http_log.h>
+#include <http_core.h>
+#include <http_protocol.h>
+#include <http_request.h>
+#include <apr_strings.h>
+#include <string.h>
+#include <stdio.h>
 
-#include "file.h"
-#include "filename.h"
-#include "templating.h"
-#include "validation.h"
+#include "miniplate.h"
 
 static int miniplate_handler(request_rec*);
 static void register_hooks(apr_pool_t*);

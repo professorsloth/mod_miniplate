@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include "../templating.h"
+#include "../miniplate.h"
 
 START_TEST (test_replaces_keyword_with_provided_content)
 {

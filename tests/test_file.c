@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include "../file.h"
+#include "../miniplate.h"
 
 START_TEST (test_can_read_file_into_string)
 {

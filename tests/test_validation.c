@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
 
-#include "../validation.h"
+#include "../miniplate.h"
 
 START_TEST (test_can_count_no_occurrences)
 {
