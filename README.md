@@ -71,6 +71,12 @@ The above content file injected into the template above would yield:
     </body>
     </html>
 
+## Disabling `mod_miniplate` for subdirectories
+
+Inside the subdirectory where you want to disable `mod_miniplate`, add this its `.htaccess`.
+
+    RemoveHandler .html
+
 ## Licence
 
 `mod_miniplate` uses the license commonly known as the BSD 3-clause license. See file `LICENCE`.
