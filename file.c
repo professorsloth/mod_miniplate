@@ -12,13 +12,14 @@ int read_file(char *filename, char **content)
 		fseek(file_handler, 0, SEEK_END);
 		length = ftell(file_handler);
 		fseek(file_handler, 0, SEEK_SET);
-		buffer = malloc(length);
+		buffer = malloc(length + 1);
 		if (buffer) {
 			bytes_read = fread(buffer, 1, length, file_handler);
 		}
 		fclose(file_handler);
 	}
 
+	buffer[bytes_read] = '\0';
 	(*content) = buffer;
 
 	return bytes_read;
