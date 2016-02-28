@@ -47,8 +47,8 @@ static int miniplate_handler(request_rec *r)
 		return HTTP_NO_CONTENT;
 	}
 
-	output = replace_by_keyword("(path)", output, r->parsed_uri.path);
-	output = replace_by_keyword("(content)", template_content, content_file_content);
+	output = replace_by_keyword("(path)", template_content, r->parsed_uri.path);
+	output = replace_by_keyword("(content)", output, content_file_content);
 
 	ap_set_content_type(r, "text/html");
 	ap_rputs(output, r);
