@@ -71,3 +71,6 @@ The above content file injected into the template above would yield:
     </body>
     </html>
 
+## Licence
+
+`mod_miniplate` uses the license commonly known as the BSD 3-clause license. See file `LICENCE`.
