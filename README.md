@@ -2,20 +2,22 @@
 
 ## Dependencies
 
-Compiling Apache modules is easiest done with the `apxs` command.
+`mod_miniplate` is designed for and tested on Apache 2.4.
 
 **Debian**
 
-    # apt-get install apache2-dev
+    # apt-get install apache2 apache2-dev
 
 **Fedora**
 
-    # dnf install httpd-devel
+    # dnf install httpd httpd-devel
 
 ## Install
 
 The default target in the Makefile will try to build and install the module.
 After the installation, the web server must be restarted for the module to be loaded.
+
+Please note that the default make target compiles *and* installs the module.
 
     # make
     # service httpd restart 
@@ -27,7 +29,9 @@ You can add this to your `.htaccess`.
 
     AddHandler miniplate .html
 
-## Template file
+## Usage
+
+### Template file
 
 Miniplate expects a file called `_base.html` to exist in the same directory as the file to be served.
 Keywords can be used to point out what content should be injected into it.
@@ -46,15 +50,15 @@ Keywords can be used to point out what content should be injected into it.
     </body>
     </html>
 
-## Content file
+### Content file
 
-Files should only hold the content to be injected in the template.
+Files should only hold content that is to be injected in the template.
 `index.html` could look like this:
 
     <h1>An article</h1>
     <p>This is some dummy content.</p>
 
-This content file injected into the template above would yield:
+The above content file injected into the template above would yield:
 
     <!DOCTYPE html>
     <html>
