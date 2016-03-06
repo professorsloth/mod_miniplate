@@ -43,6 +43,11 @@ static int miniplate_handler(request_rec *r)
 		return HTTP_INTERNAL_SERVER_ERROR;
 	}
 
+	if (strcmp(r->parsed_uri.path, BASE_TEMPLATE_NAME) == 0) {
+		apr_table_add(r->headers_out, "Location", "/");
+		return HTTP_MOVED_PERMANENTLY;
+	}
+
 	if (content_file_length < 1) {
 		return HTTP_NO_CONTENT;
 	}

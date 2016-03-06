@@ -3,10 +3,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "miniplate.h"
+
 char* get_template_filename(char *filename)
 {
 	char *base_template_abspath;
-	const char * base_template_relpath = "/_base.html";
+	const char * base_template_relpath = BASE_TEMPLATE_NAME;
 
 	char *filename_copy = strdup(filename);
 	char *this_directory = dirname(filename_copy);
