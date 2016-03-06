@@ -58,7 +58,7 @@ Files should only hold content that is to be injected in the template.
     <h1>An article</h1>
     <p>This is some dummy content.</p>
 
-The above content file injected into the template above would yield:
+The above content file injected into the template above yields:
 
     <!DOCTYPE html>
     <html>
@@ -73,7 +73,7 @@ The above content file injected into the template above would yield:
 
 ## Disabling `mod_miniplate` for subdirectories
 
-Inside the subdirectory where you want to disable `mod_miniplate`, add this its `.htaccess`.
+Inside the subdirectory where you want to disable `mod_miniplate`, add this to its `.htaccess`.
 
     RemoveHandler .html
 
