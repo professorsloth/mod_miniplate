@@ -1,4 +1,5 @@
 # mod_miniplate
+![mod_miniplate](http://serene.springtime.space/content/mod_miniplate.jpg)
 
 ## Dependencies
 
