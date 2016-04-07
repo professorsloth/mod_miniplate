@@ -78,6 +78,6 @@ Inside the subdirectory where you want to disable `mod_miniplate`, add this to i
 
     RemoveHandler .html
 
-## Licence
+## License
 
-`mod_miniplate` uses the license commonly known as the BSD 3-clause license. See file `LICENCE`.
+`mod_miniplate` uses the license commonly known as the BSD 3-clause license. See file `LICENSE`.
