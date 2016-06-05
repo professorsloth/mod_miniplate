@@ -7,11 +7,11 @@
 
 **Debian**
 
-    # apt-get install apache2 apache2-dev
+    # apt-get install apache2 apache2-dev libgumbo1 libgumbo-dev
 
 **Fedora**
 
-    # dnf install httpd httpd-devel
+    # dnf install httpd httpd-devel gumbo-parser gumbo-parser-devel
 
 ## Install
 
