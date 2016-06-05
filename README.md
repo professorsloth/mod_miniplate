@@ -39,14 +39,14 @@ Keywords can be used to point out what content should be injected into it.
 
 **(path)** - The request URI path. This is the `/hello` in `http://www.example.org/hello`.
 
-**(heading)** - Text content inside the first H1-tag.
+**(heading)** - Text content inside the last H1-tag.
 
 **(content)** - The content of the filename the request was for.
 
     <!DOCTYPE html>
     <html>
     <head>
-        <title>(path) - My site</title>
+        <title>(heading) - My site</title>
     </head>
     <body>
         (content)
@@ -66,7 +66,7 @@ The above content file injected into the template above yields:
     <!DOCTYPE html>
     <html>
     <head>
-        <title>/ - My site</title>
+        <title>An article - My site</title>
     </head>
     <body>
         <h1>An article</h1>
