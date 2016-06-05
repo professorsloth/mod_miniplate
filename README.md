@@ -37,7 +37,9 @@ You can add this to your `.htaccess`.
 Miniplate expects a file called `_base.html` to exist in the same directory as the file to be served.
 Keywords can be used to point out what content should be injected into it.
 
-**(path)** - Request URI path. This is the `/hello` in `http://www.example.org/hello`.
+**(path)** - The request URI path. This is the `/hello` in `http://www.example.org/hello`.
+
+**(heading)** - Text content inside the first H1-tag.
 
 **(content)** - The content of the filename the request was for.
 
@@ -72,9 +74,9 @@ The above content file injected into the template above yields:
     </body>
     </html>
 
-## Disabling `mod_miniplate` for subdirectories
+## Disable in subdirectory
 
-Inside the subdirectory where you want to disable `mod_miniplate`, add this to its `.htaccess`.
+Inside the subdirectory where you want to disable Miniplate, add this to its `.htaccess`.
 
     RemoveHandler .html
 

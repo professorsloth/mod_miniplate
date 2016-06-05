@@ -29,6 +29,7 @@ static int miniplate_handler(request_rec *r)
 	int template_length = 0;
 	char *content_file_content = 0;
 	int content_file_length = 0;
+	char* heading = 0;
 	char* output;
 
 	if (!r->handler || strcmp(r->handler, "miniplate")) {
@@ -38,6 +39,7 @@ static int miniplate_handler(request_rec *r)
 	base_template_filename = get_template_filename(r->filename);
 	template_length = read_file(base_template_filename, &template_content);
 	content_file_length = read_file(r->filename, &content_file_content);
+	heading = find_last_heading(content_file_content);
 
 	if (template_length < 1) {
 		return HTTP_INTERNAL_SERVER_ERROR;
@@ -53,6 +55,7 @@ static int miniplate_handler(request_rec *r)
 	}
 
 	output = replace_by_keyword("(path)", template_content, r->parsed_uri.path);
+	output = replace_by_keyword("(heading)", output, heading);
 	output = replace_by_keyword("(content)", output, content_file_content);
 
 	ap_set_content_type(r, "text/html");
